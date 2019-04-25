@@ -1,6 +1,6 @@
 __Запуск  проекта__
 
-![Иллюстрация к проекту](game/mouse.png)
+![Иллюстрация к проекту](mouse.png)
 
 Option 1)
 * Download and install [The Ren'Py Visual Novel Engine] (https://www.renpy.org/latest.html)
@@ -18,7 +18,7 @@ Option 1)
 >* Клонировать репозиторий и переместить файлы в выбранную папку.
 >* Запустить проект, выбрав его в списке в Ren'Py Launcher.
 
-![Иллюстрация к проекту](game/mouse.png)
+![Иллюстрация к проекту](mouse.png)
 
 Option 2)
 Download and install the application from the archive:
