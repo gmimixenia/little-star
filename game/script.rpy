@@ -19,7 +19,9 @@ screen main_ch:
 
 label start:
   scene m_bg with fade
-
+label m_ch:
   show screen main_ch
   pause
+  jump m_ch
+
   return

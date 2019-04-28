@@ -24,7 +24,7 @@ init python:
 ## Цвета текста в интерфейсе.
 
 ## Акцентный цвет используется в заголовках и подчёркнутых текстах.
-define gui.accent_color = '#0099ff'
+define gui.accent_color = '#062E55'
 
 ## Цвет, используемый в текстовой кнопке, когда она не выбрана и не наведена.
 define gui.idle_color = '#191970'
@@ -34,7 +34,7 @@ define gui.idle_color = '#191970'
 define gui.idle_small_color = '#888888'
 
 ## Цвет, используемых в кнопках и панелях, когда они наведены.
-define gui.hover_color = '#87CEEB'
+define gui.hover_color = '#0B5DA5'
 
 ## Цвет, используемый текстовой кнопкой, когда она выбрана, но не наведена.
 ## Кнопка может быть выбрана, если это текущий экран или текущее значение
@@ -50,8 +50,8 @@ define gui.muted_color = '#66c1ff'
 define gui.hover_muted_color = '#99d6ff'
 
 ## Цвета, используемые в тексте диалогов и выборов.
-define gui.text_color = '#404040'
-define gui.interface_text_color = '#404040'
+define gui.text_color = '#175E78'
+define gui.interface_text_color = '#175E78'
 
 
 ## Шрифты и их размеры #########################################################
@@ -72,10 +72,10 @@ define gui.text_size = 22
 define gui.name_text_size = 30
 
 ## Размер текста в пользовательском интерфейсе.
-define gui.interface_text_size = 40
+define gui.interface_text_size = 36
 
 ## Размер заголовков в пользовательском интерфейсе.
-define gui.label_text_size = 40
+define gui.label_text_size = 36
 
 ## Размер текста на экране уведомлений.
 define gui.notify_text_size = 16
@@ -106,8 +106,8 @@ define gui.textbox_yalign = 1.0
 ## Местоположение имени говорящего персонажа по отношению к текстовому окну.
 ## Это могут быть целые значения в пикселях слева и сверху от начала окна или
 ## процентное отношение, например, 0.5 для центрирования.
-define gui.name_xpos = 240
-define gui.name_ypos = 0
+define gui.name_xpos = 140
+define gui.name_ypos = 10
 
 ## Горизонтальное выравнивание имени персонажа. Это может быть 0.0 для
 ## левоориентированного, 0.5 для центрированного и 1.0 для правоориентированного
@@ -131,8 +131,8 @@ define gui.namebox_tile = False
 ## Размещение диалога по отношению к текстовому окну. Это могут быть целые
 ## значения в пикселях слева и сверху от текстового окна или процентное
 ## отношение, например, 0.5 для центрирования.
-define gui.dialogue_xpos = 268
-define gui.dialogue_ypos = 50
+define gui.dialogue_xpos = 230
+define gui.dialogue_ypos = 70
 
 ## Максимальная ширина текста диалога в пикселях.
 define gui.dialogue_width = 744
@@ -232,8 +232,8 @@ define gui.slot_button_borders = Borders(10, 10, 10, 10)
 define gui.slot_button_text_size = 14
 define gui.slot_button_text_xalign = 0.5
 define gui.slot_button_text_idle_color = gui.idle_small_color
-define gui.slot_button_text_selected_idle_color = gui.selected_color
-define gui.slot_button_text_selected_hover_color = gui.hover_color
+define gui.slot_button_text_selected_idle_color = gui.text_color
+define gui.slot_button_text_selected_hover_color = gui.text_color
 
 ## Ширина и высота миниатюры, используемой слотом сохранения.
 define config.thumbnail_width = 256
@@ -382,20 +382,20 @@ define gui.nvl_spacing = 2
 
 ## Местоположение, ширина и выравнивание заголовка, показывающего имя говорящего
 ## персонажа.
-define gui.nvl_name_xpos = 430
+define gui.nvl_name_xpos = 630
 define gui.nvl_name_ypos = 0
 define gui.nvl_name_width = 150
 define gui.nvl_name_xalign = 1.0
 
 ## Местоположение, ширина и выравнивание диалогового текста.
-define gui.nvl_text_xpos = 250
-define gui.nvl_text_ypos = 8
+define gui.nvl_text_xpos = 350
+define gui.nvl_text_ypos = 30
 define gui.nvl_text_width = 590
 define gui.nvl_text_xalign = 0.0
 
 ## Местоположение, ширина и выравнивание текста nvl_thought (текст от лица
 ## персонажа nvl_narrator).
-define gui.nvl_thought_xpos = 240
+define gui.nvl_thought_xpos = 440
 define gui.nvl_thought_ypos = 0
 define gui.nvl_thought_width = 780
 define gui.nvl_thought_xalign = 0.0

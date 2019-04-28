@@ -1,4 +1,5 @@
-__Запуск  проекта__
+
+__Launch of the project__
 
 ![Иллюстрация к проекту](mouse.png)
 
@@ -10,7 +11,7 @@ Option 1)
 * Run the project by selecting it in the list in Ren'Py Launcher.
 
 
-
+>__Запуск  проекта__
 >Вариант 1)
 >* Скачать и установить  [The Ren'Py Visual  Novel Engine] (https://www.renpy.org/latest.html) 
 >>Существует для Windows,Linux and Mac OS
