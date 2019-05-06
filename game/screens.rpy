@@ -518,7 +518,7 @@ style game_menu_outer_frame:
     background "gui/overlay/game_menu.png"
 
 style game_menu_navigation_frame:
-    xsize 280
+    xsize 350
     yfill True
 
 style game_menu_content_frame:
@@ -1037,17 +1037,17 @@ screen keyboard_help():
         label _("Ctrl")
         text _("Пропускает диалоги, пока зажат.")
 
-    hbox:
-        label _("Tab")
-        text _("Включает режим пропуска.")
+    #hbox:
+    #    label _("Tab")
+    #    text _("Включает режим пропуска.")
 
-    hbox:
-        label _("Page Up")
-        text _("Откат назад по сюжету игры.")
+    #hbox:
+    #    label _("Page Up")
+    #    text _("Откат назад по сюжету игры.")
 
-    hbox:
-        label _("Page Down")
-        text _("Откатывает предыдущее действие вперёд.")
+    #hbox:
+    #    label _("Page Down")
+    #    text _("Откатывает предыдущее действие вперёд.")
 
     hbox:
         label "H"
@@ -1057,9 +1057,9 @@ screen keyboard_help():
         label "S"
         text _("Делает снимок экрана.")
 
-    hbox:
-        label "V"
-        text _("Включает поддерживаемый {a=https://www.renpy.org/l/voicing}синтезатор речи{/a}.")
+    #hbox:
+    #    label "V"
+    #    text _("Включает поддерживаемый {a=https://www.renpy.org/l/voicing}синтезатор речи{/a}.")
 
 
 screen mouse_help():
@@ -1076,13 +1076,13 @@ screen mouse_help():
         label _("Правый клик")
         text _("Вход в игровое меню.")
 
-    hbox:
-        label _("Колёсико вверх\nКлик на сторону отката")
-        text _("Откат назад по сюжету игры.")
+    #hbox:
+    #    label _("Колёсико вверх\nКлик на сторону отката")
+    #    text _("Откат назад по сюжету игры.")
 
-    hbox:
-        label _("Колёсико вниз")
-        text _("Откатывает предыдущее действие вперёд.")
+    #hbox:
+    #    label _("Колёсико вниз")
+    #    text _("Откатывает предыдущее действие вперёд.")
 
 
 screen gamepad_help():

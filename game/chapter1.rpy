@@ -1,11 +1,76 @@
+init -2 python:
+    items = []
+    def GetFN(index=0):
+        global items
+        if (index >= 0) and (index < len(items)):
+            fn, hn = items[index]
+            return "inventory/" + fn + ".png"
+        else:
+            return ""
+
+    def GetName(index=0):
+        global items
+        if (index >= 0) and (index < len(items)):
+            fn, hn = items[index]
+            SetVariable("name_p",hn)
+        else:
+            name_p=""
+
+    def GetHint(index=0):
+        global items
+        if (index >= 0) and (index < len(items)):
+            fn, hn = items[index]
+            return hn
+        else:
+            return ""
+
+
+screen inventory:
+    zorder 111
+    default tt = Tooltip(" ")
+    frame:
+        xalign 1.0
+        background Solid("#0000")
+        xmaximum 130
+        ymaximum 450
+        xfill True
+        vbox:
+            imagebutton auto "inventory/bag_%s.png" action SetVariable("invent", not invent)
+            if invent:
+                text tt.value
+                hbox:
+                    viewport id "box":
+                        yinitial 9999
+                        xmaximum 0.9
+                        mousewheel True
+                        draggable True
+                        vbox:
+                            for i in range(0, len(items)):
+                                imagebutton:
+                                    idle Image(GetFN(i))
+                                    hover Image(GetFN(i))
+                                    hovered tt.Action(GetHint(i))
+                                    action  [SetVariable("name_p",items[i][0]),Jump ("use_it")]
+
+                    vbar yfill True value YScrollValue("box")
+
+
+
 init:
+     $ name_p="no"
+     $ invent = False
      $ vik = Character(u'Викки', color="#0000aa")
      $ ron = Character(u'Рон',color="#00aacc")
      image chapter="Images/chapter1.jpg"
      image ron="Images/ron.png"
      image kitchen="Images/kitchen.jpg"
      image bg = "Images/room.jpg"
-     image hero ="Images/hero.png"
+     image hero_us ="Images/hero_usual.png"
+     image hero_sad ="Images/hero_sad.png"
+     image hero_tears ="Images/hero_tears.png"
+     image hero_blush ="Images/hero_blush.png"
+     image hero_smile ="Images/hero_smile.png"
+     image hero_fear ="Images/hero_fear.png"
      $ text = Character(" ",kind=nvl)
 
 screen toy:
@@ -45,7 +110,8 @@ label first_step:
     play music "music/alarm.ogg"
     pause
 
-    show hero at right
+    show hero_us at right
+
     window hide
     stop music fadeout 2.0
 
@@ -55,13 +121,14 @@ label first_step:
     text "Хотя и погода сегодня подходящая для прогулки. Может быть, папа погуляет с ним немного во дворе."
     text "Может, они увидят там котенка. Он рыженький, маленький и пищащий, мальчик ласково называет его Бубликом, но они не могут забрать его домой - у папы и так слишком много работы. Поэтому мальчик просто подкармливает этот маленький комочек сосисками и молоком, делает ему корзинку под солнышком и играет с мячиком."
     text "Викки потягивается, зевая, и уже полностью включается в свою милую детскую деятельноcть."
-
+    hide hero_us
+    show hero_us
     vik "{i}Какое чудесное утро!{/i} "
     vik "{i}Мне нужно идти на кухню, папа наверное уже ждет меня там. Интересно, что у нас на завтрак?{/i}"
     vik "{i}Где же мой любимый плюшевый мишка?{/i}"
     vik "{i}Я должен его найти{/i}"
     show screen toy
-    show hero
+    show hero_us
 
 label find:
     window hide
@@ -74,9 +141,14 @@ label next:
 
     $ teddy = 1
     hide screen toy
+    hide hero_us
+    show hero_smile
+    $ items.extend([("toy", "Медвежонок")])
+    show screen inventory
     vik "{i}Наконец-то я нашел его!{/i}"
     vik "{i}Мне уже пора!{/i}"
     vik "{i}М-м-м, как вкусно пахнет!{/i}"
+    hide screen inventory
 
     scene kitchen with fade
 
@@ -122,8 +194,7 @@ label active_choose:
     window hide
     pause
 
-    if ball==0 or pic==0 or read==0:
-        jump active_choose
+    jump active_choose
 
 label ret:
     vik "Наконец, вскоре раздается легкий скрип двери и в комнату заходит Рон."
