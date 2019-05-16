@@ -4,7 +4,7 @@ __Launch of the project__
 ![Иллюстрация к проекту](mouse.png)
 
 Option 1)
-* Download and install [The Ren'Py Visual Novel Engine] (https://www.renpy.org/latest.html)
+* Download and install [The Ren'Py Visual Novel Engine](https://www.renpy.org/latest.html)
 > Available for Windows, Linux and Mac OS
 * Select the project folder in the settings of Ren'Py Launcher.
 * Clone repository and move files to selected folder.
@@ -12,8 +12,9 @@ Option 1)
 
 
 >__Запуск  проекта__
+
 >Вариант 1)
->* Скачать и установить  [The Ren'Py Visual  Novel Engine] (https://www.renpy.org/latest.html) 
+>* Скачать и установить  [The Ren'Py Visual  Novel Engine](https://www.renpy.org/latest.html) 
 >>Существует для Windows,Linux and Mac OS
 >* Выбрать папку проектов в настройках Ren'Py Launcher.
 >* Клонировать репозиторий и переместить файлы в выбранную папку.
