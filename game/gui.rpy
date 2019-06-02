@@ -131,8 +131,8 @@ define gui.namebox_tile = False
 ## Размещение диалога по отношению к текстовому окну. Это могут быть целые
 ## значения в пикселях слева и сверху от текстового окна или процентное
 ## отношение, например, 0.5 для центрирования.
-define gui.dialogue_xpos = 230
-define gui.dialogue_ypos = 70
+define gui.dialogue_xpos = 360
+define gui.dialogue_ypos = 55
 
 ## Максимальная ширина текста диалога в пикселях.
 define gui.dialogue_width = 744
@@ -389,7 +389,7 @@ define gui.nvl_name_xalign = 1.0
 
 ## Местоположение, ширина и выравнивание диалогового текста.
 define gui.nvl_text_xpos = 350
-define gui.nvl_text_ypos = 30
+define gui.nvl_text_ypos = 40
 define gui.nvl_text_width = 590
 define gui.nvl_text_xalign = 0.0
 

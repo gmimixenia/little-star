@@ -24,6 +24,8 @@ init -2 python:
         else:
             return ""
 
+init python:
+    res=False
 
 screen inventory:
     zorder 111
@@ -50,7 +52,7 @@ screen inventory:
                                     idle Image(GetFN(i))
                                     hover Image(GetFN(i))
                                     hovered tt.Action(GetHint(i))
-                                    action  [SetVariable("name_p",items[i][0]),SetVariable("invent_time",invent_count),Jump ("use_it")]
+                                    action  [SetVariable("name_p",items[i][0]),SetVariable("invent_time",invent_count),Call ("use_it")]
 
                     vbar yfill True value YScrollValue("box")
 
@@ -68,7 +70,7 @@ init:
      $ ball=0
      $ read =0
      $ vik = Character(u'Викки', color="#0000aa")
-     $ ron = Character(u'Рон',color="#00aacc")
+     define ron = Character(u'Рон',color="#1000ac")
      image chapter="Images/chapter1.jpg"
      image ron_us="Images/ron_usual.png"
      image ron_sad="Images/ron_sad.png"
@@ -76,6 +78,9 @@ init:
      image ron_fr="Images/ron_frowning.png"
      image kitchen="Images/kitchen.jpg"
      image bg = "Images/room.jpg"
+     image park1 = "Images/park1.jpg"
+     image park2 = "Images/park2.jpg"
+     image park3 = "Images/park3.jpg"
      image hero_us ="Images/hero_usual.png"
      image hero_sad ="Images/hero_sad.png"
      image hero_tears ="Images/hero_tears.png"
@@ -88,23 +93,60 @@ screen toy:
      imagebutton xalign 0.85 yalign 0.71:
         idle ("Images/toy.png")
         action Jump ("next")
-     imagebutton xalign 0.25 yalign 0.61:
+     imagebutton xalign 0.3 yalign 0.51:
         idle ("Images/toy2.png")
         action Jump ("not")
-     imagebutton xalign 0.33 yalign 0.51:
+     imagebutton xalign 0.73 yalign 0.61:
        idle ("Images/toy3.png")
        action Jump ("not")
+       
+screen cat_food:
+     imagebutton xalign 0.55 yalign 0.81:
+        idle ("Images/cat.png")
+        action Jump ("cat_click")
 
 screen active:
-     imagebutton xalign 0.85 yalign 0.71:
+     imagebutton xalign 0.29 yalign 0.51:
         idle ("Images/art.png")
         action Jump ("art")
-     imagebutton xalign 0.15 yalign 0.61:
+     imagebutton xalign 0.6 yalign 0.75:
         idle ("Images/ball.png")
         action Jump ("ball")
-     imagebutton xalign 0.33 yalign 0.51:
+     imagebutton xalign 0.0 yalign 0.38:
        idle ("Images/book.png")
        action Jump ("book")
+
+screen step_to_kitchen:
+    default t_t = Tooltip(" ")
+    default t_t2 = Tooltip(" ")
+
+    imagebutton xalign 0.80 yalign 0.88:
+        idle ("Images/step.png")
+        hovered t_t.Action("На кухню")
+        action Jump ("kitchen")
+
+    imagebutton xalign 0.20 yalign 0.88:
+        idle ("Images/step.png")
+        hovered t_t2.Action("В ванную")
+        action Jump ("bathroom")
+
+    text t_t.value:
+        xalign 0.80 yalign 0.82
+        color "#fff"
+    text t_t2.value:
+        xalign 0.20 yalign 0.82
+        color "#fff"
+
+screen step_to_room:
+    default t_t = Tooltip(" ")
+
+    imagebutton xalign 0.50 yalign 0.88:
+        idle ("Images/step.png")
+        hovered t_t.Action("В комнату")
+        action Jump ("to_room")
+    text t_t.value:
+        xalign 0.50 yalign 0.82
+        color "#fff"
 
 
 label first_step:
@@ -133,6 +175,7 @@ label first_step:
     text "Викки потягивается, зевая, и уже полностью включается в свою милую детскую деятельноcть."
     hide hero_us
     show hero_us
+
     vik "{i}Какое чудесное утро!{/i} "
     vik "{i}Мне нужно идти на кухню, папа наверное уже ждет меня там. Интересно, что у нас на завтрак?{/i}"
     vik "{i}Где же мой любимый плюшевый мишка?{/i}"
@@ -155,18 +198,29 @@ label next:
     show hero_smile
 
     $ items.extend([("toy", "Медвежонок")])
-    #show screen inventory
+    show screen inventory
 
     vik "{i}Наконец-то я нашел его!{/i}"
     vik "{i}Мне уже пора!{/i}"
     vik "{i}М-м-м, как вкусно пахнет!{/i}"
 
-    #hide screen inventory
+label steps :
+    show screen step_to_kitchen
+    window hide
+    pause
+    jump steps
 
-    scene kitchen with fade
 
+label bathroom:
+    hide screen step_to_kitchen
+    vik "{i}Мне пока не нужно в ванную.{/i}"
+    vik "{i}Я должен пойти на кухню{/i}"
+    jump steps
 
-
+label kitchen:
+    hide screen step_to_kitchen
+    scene kitchen
+    pause
     text "На кухне уже все было залито светом. Рон, немолодой, уже седой мужчина, с привычной ловкостью жарил маленькие блинчики, и не сразу заметил, как мальчик подошел к нему и обнял за ногу."
     show hero_smile at right
     vik "Доброе утро,пап!"
@@ -204,9 +258,16 @@ label next:
     show ron_us at left
     text "Рон поставил к раковине стульчик и доверил Викки мыть небольшие тарелочки, а сам вытирал их и ставил на полки. {w}Вдвоем они неплохо справлялись с домашними делами, это точно. Пусть у Рона было много проблем, он научился с ними справляться. {w}И у них все хорошо. {w}И будет хорошо."
     text "Викки слез со стула и направился в свою комнату, чтобы поиграть, пока папа занимается необходимыми делами."
+label s_room:
+    show screen step_to_room
+    window hide
+    pause
+    jump s_room
 
-
-    scene room with fade
+label to_room:
+    hide screen step_to_room
+    scene room
+    pause
     show hero_us at right
     vik "{i}Чем же мне заняться сейчас?{/i}"
 
@@ -308,42 +369,101 @@ label clothe_ch:
 
 
     image hero_cl_us="Images/[clothe]/hero_us.png"
-    show hero_cl_us
-    vik "Я готов"
+    show hero_cl_us at right
 
+    vik "{i}Мне необходимо собрать все свои вещи до прогулки, чтобы в комнате не остался беспорядок. У меня мало времени.{/i}"
+label game_find:
+    $ InitGame("room", 5.0, (1041, 500), "figure1", (617, 326), "figure2", (343, 603), "figure3", (819, 409), "figure4",(751, 569), "figure5")
+    $ GameAsBG()
+    $ res = StartGame()
+    $ GameAsBG()
+    if oRes:
+        vik "{i}Ура! Я успел вовремя!{/i}"
+    else:
+        "Найдено предметов: [oLen] из [maxLen]."
+        vik "{i}Нет, я не успел. Мне нужно попытаться снова.{/i}"
+        $res=False
+        jump game_find
 
+    text "Мальчик с улыбкой прошелся около зеркала несколько раз и взял отца за руку."
+    vik "Все, я готов. Мы можем идти"
+    text "Рон кивнул ему, и они вдвоем вышли из квартиры, предвкушая прекрасную прогулку."
+    
+    scene black with fade
+    scene park1
+    
+    text "Они долго шли по парку, пока не увидели там котенка."
+    show hero_cl_us at right
+    vik "Папа, его нужно покормить!"
+    show ron_us at left
+    ron "Конечно, малыш. Хочешь сделать это сам?"
+    vik "Да, папочка!"
+    show screen cat_food
+label cat_game:
+    window hide
+    pause
+    
+    jump cat_game
+    
+    
+    
+label after_click:
+    scene park1
+    show hero_cl_us at right
+    if win==True:
+        vik "Ура, я смог сделать это!"
+        text "Мальчик справился со своей задачей, поэтому маленький котенок хрустел кормом и ласково мурчал, когда Викки пытался погладить рыжую шерстку."
+        show ron_smile at left
+        ron "Ты молодец, солнышко!"
+    else:
+        vik "У меня ничего не вышло, папа, помоги, пожалуйста!"
+        show ron_us at left
+        ron "Да, малыш, давай я это сделаю."
+        text "Рон помог малышу открыть пакет и покормить котенка. Маленький комочек с удовольствием хрустел кормом и смотрел на двух людей с благодарностью."
+    scene park1
 
-
-
-
-
+    text "Но слишком долго стоять на одном месте им не хотелось. Викки в последний раз погладил котенка и улыбнулся, помахав ему маленькой ладошкой."
+    text "Потом они пошли дальше, разговаривая о разных вещах."
     return
 
+
+
+
+
+
 label use_it:
-    if invent_time==1:
+    $ invent = False
+    if invent_time == 0:
+        vik "{i}Мне не нужно сейчас это использовать.{/i}"
+        pause
+
+
+    if invent_time == 1:
         if name_p=="picture":
             vik "{i}Да, я должен показать ему рисунок{/i}"
             jump pic_next
         else:
             vik "{i}Нет, мне нужно показать не это.{/i}"
             jump not_pic
-
+return
 
 
 label pic_show:
     vik "Только подожди немного!"
     $invent_count=1
+
 label not_pic:
     vik "{i}Мне нужно кое-что показать ему.{/i}"
     show screen inventory
     jump not_pic
-    
-label pic_next:
-    hide screen inventory
-    vik "Смотри, папа, я нарисовал это для тебя!"
 
+label pic_next:
+    #hide screen inventory
+    vik "Смотри, папа, я нарисовал это для тебя!"
+    $ invent_count=0
     if pic==10:
         $ron_r_ship+=20
+        $pic=0
         vik "Это ты. Вот,смотри."
         text "На рисунке действительно изображен Рон. Сидит за столом и держит в руках стопку каких-то документов, гордо подписанных \"Важные бумаги\"."
         hide ron_us
@@ -352,6 +472,7 @@ label pic_next:
         ron "Это потрясающе, малыш. Ты у меня большой молодец."
         ron "Это очень красиво. Я повешу его к остальным, когда мы вернемся с прогулки."
     if pic==20:
+        $pic=0
         vik "Это мой мишка. Я его очень люблю!"
         hide ron_us
         show ron_smile at left
@@ -362,6 +483,7 @@ label pic_next:
         ron "Ты у меня очень талантливый, Солнышко."
 
     if pic==30:
+        $pic=0
         vik "Я нарисовал то, что видел за окном."
         hide ron_us
         show ron_smile at left
