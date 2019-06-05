@@ -23,7 +23,7 @@ Option 1)
 ![Иллюстрация к проекту](mouse.png)
 
 Option 2)
-Download and install the application from the archive:
+Download and install the application from the archive: [Little Star](https://drive.google.com/open?id=1qfvJcDlGhrWoRFqLHxTYxw2HnMnLuKUg)
 
 >Вариант 2)
->Скачать и установить приложение из архива:
+>Скачать и установить приложение из архива: [Little Star](https://drive.google.com/open?id=1qfvJcDlGhrWoRFqLHxTYxw2HnMnLuKUg)
